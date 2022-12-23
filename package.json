@@ -2,16 +2,25 @@
   "name": "blots",
   "version": "1.0.2",
   "description": "Simple SPA base configurantion with Page.js, Mustache.js and Jquery.",
-  "type": "module",
-  "main": "index.js",
+  "main": "./src/blots.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/devvime/blots.git"
   },
-  "keywords": ["SPA", "page", "mustache", "jquery", "routes", "components", "simple", "view", "viewEngine"],
+  "keywords": [
+    "SPA",
+    "page",
+    "mustache",
+    "jquery",
+    "routes",
+    "components",
+    "simple",
+    "view",
+    "viewEngine"
+  ],
   "author": "devvime",
   "license": "MIT",
   "bugs": {
@@ -22,5 +31,14 @@
     "jquery": "^3.6.2",
     "mustache": "^4.2.0",
     "page": "^1.11.6"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2"
   }
 }
