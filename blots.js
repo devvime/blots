@@ -14,7 +14,7 @@ export const blots = {
     page()
   },
   render(component) {
-    return new component
+    return new component || component
   },
   createElement(html) {
     const template = document.createElement("template")
