@@ -1,8 +1,8 @@
 {
   "name": "blots",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Simple SPA base configurantion with Page.js, Mustache.js and Jquery.",
-  "main": "blots.min.js",
+  "main": "blots.js",
   "scripts": {
     "build": "webpack --config webpack.config.js"
   },
