@@ -1,4 +1,4 @@
-# Blots
+# Blots.js
 
 Simple SPA base configurantion with Page.js, Mustache.js and Jquery.
 
