@@ -1,0 +1,26 @@
+{
+  "name": "blots",
+  "version": "1.0.0",
+  "description": "Simple SPA base configurantion with Page.js, Mustache.js and Jquery.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devvime/blots.git"
+  },
+  "keywords": ["SPA", "page", "mustache", "jquery", "routes", "components", "simple", "view", "viewEngine"],
+  "author": "devvime",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devvime/blots/issues"
+  },
+  "homepage": "https://github.com/devvime/blots#readme",
+  "dependencies": {
+    "jquery": "^3.6.2",
+    "mustache": "^4.2.0",
+    "page": "^1.11.6"
+  }
+}
