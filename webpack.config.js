@@ -4,7 +4,7 @@ module.exports = {
   entry: './blots.js',
   output: {
     filename: 'blots.min.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, ''),
   },
   mode: 'production',
   module: {
