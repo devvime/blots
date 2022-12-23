@@ -23,7 +23,7 @@ export const blots = {
   },
   draw(target, html, data = {}) {    
     const rendered = Mustache.render(html, data)
-    $(`${target}`).html('')
+    $(`${target}`).empty()
     $(`${target}`).append(blots.createElement(rendered))
   }
 }
