@@ -7,7 +7,7 @@ export const blots = {
   route(path, cb) {
     blots.routes.push(page(path, () => new cb))
   },
-  run() {
+  start() {
     blots.routes.map(route => {
       route
     })
