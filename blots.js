@@ -25,5 +25,8 @@ export const blots = {
     const rendered = Mustache.render(html, data)
     $(`${target}`).empty()
     $(`${target}`).append(blots.createElement(rendered))
+  },
+  redirect(route) {
+    return page.redirect(route)
   }
 }
