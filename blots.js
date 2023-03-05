@@ -28,8 +28,5 @@ export const blots = {
   },
   redirect(route) {
     return page.redirect(route)
-  },
-  component(componentName) {
-    return () => new componentName
   }
 }

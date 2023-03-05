@@ -1,6 +1,6 @@
 {
   "name": "blots",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Simple SPA base configurantion with Page.js, Mustache.js and Jquery.",
   "main": "blots.js",
   "scripts": {
