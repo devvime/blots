@@ -4,8 +4,8 @@ import Mustache from 'mustache'
 
 export const blots = {
   routes: [],
-  route(path, cb) {
-    blots.routes.push(page(path, () => new cb))
+  route(path, component) {
+    blots.routes.push(page(path, component))
   },
   start() {
     blots.routes.map(route => {
@@ -28,5 +28,8 @@ export const blots = {
   },
   redirect(route) {
     return page.redirect(route)
+  },
+  component(componentName) {
+    return () => new componentName
   }
 }
