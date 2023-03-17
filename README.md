@@ -40,7 +40,16 @@ Need to add a .htaccess file to the project
 </IfModule>
 ```
 
-In the html file add the tag <base href="/"> inside the <head>
+In the html file add the tag ```<base href="/">``` inside the ```<head>```
+
+```
+<html>
+    <head>
+        <base href="/"> 
+    </head>
+    <body></body>
+</html>
+```
 
 ### Create routes
 
