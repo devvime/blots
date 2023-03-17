@@ -207,6 +207,8 @@ Get List array and objects in html file
 ```js
 import MyClass from 'myClass'
 
-blots.route('/', (ctx, next) => new MyClass.index(ctx, next))
+const myClass = new MyClass
+
+blots.route('/', (ctx, next) => myClass.index(ctx, next))
 ```
 
