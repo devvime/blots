@@ -205,7 +205,7 @@ Get List array and objects in html file
 ### Using classes in routes
 
 ```js
-import MyClass form 'myClass'
+import MyClass from 'myClass'
 
 blots.route('/', (ctx, next) => new MyClass.index(ctx, next))
 ```
