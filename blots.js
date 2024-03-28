@@ -28,5 +28,28 @@ export const blots = {
   },
   redirect(route) {
     return page.redirect(route)
+  },
+  createObservable() {
+    let observers = [];
+    return {
+      subscribe: function (observer) {
+        observers.push(observer);
+      },
+      save: function (data) {
+        observers.forEach(observer => observer(data));
+      }
+    };
   }
+}
+
+export const click = (target, action) => {
+  document.querySelector(`[${target}]`).addEventListener('click', action)
+}
+
+export const change = (target, action) => {
+  document.querySelector(`[${target}]`).addEventListener('change', action)
+}
+
+export const inputChange = (target, action) => {
+  document.querySelector(`[${target}]`).addEventListener('input', action)
 }
