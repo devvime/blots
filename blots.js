@@ -30,26 +30,41 @@ export const blots = {
     return page.redirect(route)
   },
   createObservable() {
-    let observers = [];
+    let observers = []
     return {
       subscribe: function (observer) {
-        observers.push(observer);
+        observers.push(observer)
       },
       save: function (data) {
-        observers.forEach(observer => observer(data));
+        observers.forEach(observer => observer(data))
       }
     };
   }
 }
 
 export const click = (target, action) => {
-  document.querySelector(`[${target}]`).addEventListener('click', action)
+  document.querySelectorAll(`[${target}]`).forEach(el => {
+    el.addEventListener('click', action)
+  })
 }
 
 export const change = (target, action) => {
-  document.querySelector(`[${target}]`).addEventListener('change', action)
+  document.querySelectorAll(`[${target}]`).forEach(el => {
+    el.addEventListener('change', action)
+  })
 }
 
 export const inputChange = (target, action) => {
-  document.querySelector(`[${target}]`).addEventListener('input', action)
+  document.querySelectorAll(`[${target}]`).forEach(el => {
+    el.addEventListener('input', action)
+  })
+}
+
+export const emit = (name, data) => {
+  const event = new CustomEvent(name, { detail: data });
+  document.dispatchEvent(event);
+}
+
+export const output = (name, callback) => {
+  document.addEventListener(name, callback)
 }
