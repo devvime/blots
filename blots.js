@@ -7,11 +7,11 @@ export const blots = {
   route(path, component) {
     blots.routes.push(page(path, component))
   },
-  start() {
+  start(params = {}) {
     blots.routes.map(route => {
       route
     })
-    page()
+    page(params)
   },
   render(component) {
     return new component || component
