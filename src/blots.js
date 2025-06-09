@@ -4,61 +4,56 @@ import Mustache from 'mustache'
 
 export const blots = {
   routes: [],
+  
   route(path, component) {
     blots.routes.push(page(path, component))
   },
+  
   start(params = {}) {
-    blots.routes.map(route => {
-      route
-    })
     page(params)
   },
+  
   render(component) {
-    return new component || component
+    return typeof component === 'function' ? new component() : component
   },
+  
   createElement(html) {
     const template = document.createElement("template")
-    template.innerHTML = html.trim()
+    template.innerHTML = (html || '').trim()
     return template.content.firstElementChild
   },
-  draw(target, html, data = {}) {    
+  
+  draw(target, html, data = {}) {
     const rendered = Mustache.render(html, data)
-    $(`${target}`).empty()
-    $(`${target}`).append(blots.createElement(rendered))
+    const el = blots.createElement(rendered)
+    const $target = $(target)
+    $target.empty()
+    if (el) $target.append(el)
   },
+  
   redirect(route) {
-    return page.redirect(route)
+    page.redirect(route)
   },
+
   createObservable() {
-    let observers = []
+    const observers = new Set()
     return {
-      subscribe: function (observer) {
-        observers.push(observer)
-      },
-      save: function (data) {
-        observers.forEach(observer => observer(data))
-      }
-    };
+      subscribe: observer => observers.add(observer),
+      unsubscribe: observer => observers.delete(observer),
+      notify: data => observers.forEach(observer => observer(data))
+    }
   }
 }
 
-export const click = (target, action) => {
+export const addEvent = (event, target, action) => {
   document.querySelectorAll(`[${target}]`).forEach(el => {
-    el.addEventListener('click', action)
+    el.addEventListener(event, action)
   })
 }
 
-export const change = (target, action) => {
-  document.querySelectorAll(`[${target}]`).forEach(el => {
-    el.addEventListener('change', action)
-  })
-}
-
-export const inputChange = (target, action) => {
-  document.querySelectorAll(`[${target}]`).forEach(el => {
-    el.addEventListener('input', action)
-  })
-}
+export const click = (target, action) => addEvent('click', target, action)
+export const change = (target, action) => addEvent('change', target, action)
+export const inputChange = (target, action) => addEvent('input', target, action)
 
 export const emit = (name, data) => {
   const event = new CustomEvent(name, { detail: data });
