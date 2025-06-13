@@ -1,0 +1,35 @@
+{
+  "name": "blots",
+  "version": "1.0.0",
+  "description": "Simple SPA.",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "esbuild src/index.js --bundle --minify --target=es2015 --outfile=dist/js/index.js --sourcemap --loader:.html=text --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devvime/blots.git"
+  },
+  "keywords": [
+    "SPA",
+    "mustache",
+    "routes",
+    "components",
+    "simple",
+    "view",
+    "templateEngine"
+  ],
+  "author": "devvime",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devvime/blots/issues"
+  },
+  "homepage": "https://github.com/devvime/blots#readme",
+  "dependencies": {
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "esbuild": "^0.25.5"
+  }
+}

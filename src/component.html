@@ -1,0 +1,21 @@
+<h1>{{ title }}</h1>
+
+<input type="text" @change="updateTitle" />
+
+<button @click="sayHello">Clique aqui</button>
+<button @click="testIf">Test if</button>
+
+<ul>
+    <li @for="item in items">{{ item }}</li>
+</ul>
+
+<p @if="showMessage">Mensagem visível</p>
+
+<button @click="toggle" @class="{ active: isActive }">
+    <span @if="isActive">Desativar</span>
+    <span @else="isActive">Ativar</span>
+</button>
+
+<input type="text" @model="name" @name="inputName">
+<input type="text" @model="title" @name="inputTitle">
+<p>Olá, {{ name }}!</p>
