@@ -18,7 +18,10 @@ export default class Component {
 
     this.init();
     this.setMethods();
-    this.render();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      this.render();
+    });
   }
 
   init() {}
