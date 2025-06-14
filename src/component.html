@@ -18,4 +18,9 @@
 
 <input type="text" @model="name" @name="inputName">
 <input type="text" @model="title" @name="inputTitle">
+<input type="text" @model="user.name" @name="inputUserName">
+
 <p>Olá, {{ name }}!</p>
+
+<p>User name: {{ user.name }}</p>
+<p>Address: street: {{ user.address.street }}</p>

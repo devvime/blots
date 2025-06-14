@@ -14,6 +14,12 @@ router.add("/", async () => {
       showMessage: true,
       items: ["Maçã", "Banana", "Laranja"],
       isActive: false,
+      user: {
+        name: 'Steve',
+        address: {
+          street: 'Rua de test'
+        }
+      },
       methods: {
         sayHello: () => alert("Olá!"),
         testIf: () => {
