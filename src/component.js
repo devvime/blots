@@ -17,7 +17,6 @@ export default class Component {
     });
 
     this.init();
-    this.setMethods();
 
     document.addEventListener("DOMContentLoaded", () => {
       this.render();
@@ -26,7 +25,21 @@ export default class Component {
 
   init() {}
 
-  setMethods() {}
+  setData(data = {}) {
+    Object.keys(data).forEach((item) => {
+      this.component[item] = data[item];
+    });
+  }
+
+  getData(name) {
+    return this.component[name];
+  }
+
+  setMethods(methods = {}) {
+    Object.keys(methods).forEach((item) => {
+      this.component[item] = methods[item];
+    });
+  }
 
   render() {
     document.querySelector(this.target).innerHTML = this.template;

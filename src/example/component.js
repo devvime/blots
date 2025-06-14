@@ -11,32 +11,42 @@ export default class ExampleComponent extends Component {
   }
 
   init() {
-    this.component.name = "Victor";
-    this.component.title = "Hello World!";
-    this.component.showMessage = true;
-    this.component.items = ["Maçã", "Banana", "Laranja"];
-    this.component.isActive = false;
-    this.component.user = {
+    this.setData({
       name: "Steve",
-      address: {
-        street: "Rua de test",
+      title: "Hello World!",
+      showMessage: true,
+      items: ["Cup", "Book", "Game"],
+      isActive: false,
+      user: {
+        name: "CJ",
+        address: {
+          street: "Groove street",
+        },
       },
-    };
+    });
+    this.setMethods({
+      sayHello: () => alert("Olá!"),
+      testIf: () => this.testIf(),
+      updateTitle: (e) => this.updateTitle(e),
+      toggle: () => this.toggle(),
+    });
   }
 
-  setMethods() {
-    this.component.sayHello = () => alert("Olá!");
+  testIf() {
+    this.setData({
+      showMessage: !this.getData("showMessage"),
+    });
+  }
 
-    this.component.testIf = () => {
-      this.component.showMessage = !this.component.showMessage;
-    };
+  updateTitle(e) {
+    this.setData({
+      items: [...this.getData("items"), e.target.value],
+    });
+  }
 
-    this.component.updateTitle = (e) => {
-      this.component.items = [...this.component.items, e.target.value];
-    };
-
-    this.component.toggle = () => {
-      this.component.isActive = !this.component.isActive;
-    };
+  toggle() {
+    this.setData({
+      isActive: !this.getData("isActive"),
+    });
   }
 }
