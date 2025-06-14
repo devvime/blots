@@ -4,7 +4,10 @@
   "description": "Simple SPA.",
   "main": "src/index.js",
   "scripts": {
-    "dev": "esbuild src/index.js --bundle --minify --target=es2015 --outfile=dist/js/index.js --sourcemap --loader:.html=text --watch"
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
+    "server": "npx http-server . -P http://localhost:8080? -c-1",
+    "dev": "esbuild src/main.js --bundle --minify --target=es2015 --outfile=dist/js/main.min.js --sourcemap --loader:.html=text --watch",
+    "build": "esbuild src/index.js --bundle --minify --target=es2015 --outfile=dist/js/blots.min.js --sourcemap --loader:.html=text"
   },
   "repository": {
     "type": "git",
