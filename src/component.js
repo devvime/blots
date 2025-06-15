@@ -17,7 +17,6 @@ export default class Component {
     });
 
     this.init();
-
     document.addEventListener("DOMContentLoaded", () => {
       this.render();
     });

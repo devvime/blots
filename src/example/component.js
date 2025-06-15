@@ -7,7 +7,6 @@ export default class ExampleComponent extends Component {
 
   constructor(params, query) {
     super(params, query);
-    this.render();
   }
 
   init() {
