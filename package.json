@@ -15,12 +15,12 @@
   },
   "keywords": [
     "SPA",
-    "mustache",
     "routes",
     "components",
-    "simple",
-    "view",
-    "templateEngine"
+    "view-engine",
+    "template-engine",
+    "data-bindings",
+    "reactive-proxy"
   ],
   "author": "devvime",
   "license": "MIT",
@@ -28,9 +28,7 @@
     "url": "https://github.com/devvime/blots/issues"
   },
   "homepage": "https://github.com/devvime/blots#readme",
-  "dependencies": {
-    "mustache": "^4.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "concurrently": "^9.1.2",
     "esbuild": "^0.25.5"
