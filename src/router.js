@@ -17,13 +17,12 @@ export class Router {
   }
 
   setDataLink() {
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll("a[data-link]").forEach((el) => {
-        el.addEventListener("click", (e) => {
-          e.preventDefault();
-          const target = e.currentTarget.getAttribute("href");
-          if (target) this.navigate(target);
-        });
+    document.querySelectorAll("[data-link]").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.target.style.cursor = "pointer";
+        const target = e.currentTarget.getAttribute("data-link");
+        if (target) this.navigate(target);
       });
     });
   }

@@ -1,12 +1,15 @@
 import { blots } from "./blots.js";
 import { state } from "./state.js";
 
+import { router } from "./main.js";
+
 export class Component {
   component = {};
   target = "app";
   template = "";
   params = {};
   query = {};
+  componentChilds = [];
 
   constructor(params = {}, query = {}) {
     this.params = params;
@@ -15,6 +18,8 @@ export class Component {
     this.component = state({}, () => {
       this.render();
     });
+
+    this.component.navigate = (e) => this.navigate(e);
 
     this.init();
     document.addEventListener("DOMContentLoaded", () => {
@@ -40,8 +45,21 @@ export class Component {
     });
   }
 
+  addComponent(component, data = []) {
+    this.componentChilds.push(new component(this.params, this.query, data));
+  }
+
+  navigate(e) {
+    router.navigate(e.target.getAttribute("data-path"));
+  }
+
   render() {
-    document.querySelector(this.target).innerHTML = this.template;
-    blots(this.target, this.component, this.component);
+    if (document.querySelector(this.target)) {
+      document.querySelector(this.target).innerHTML = this.template;
+      blots(this.target, this.component, this.component);
+    }
+    this.componentChilds.forEach((item) => {
+      item.render();
+    });
   }
 }

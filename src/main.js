@@ -1,7 +1,7 @@
 import { Router } from "./router.js";
 import ExampleComponent from "./example/component.js";
 
-const router = new Router();
+export const router = new Router();
 
 router.add("/", (params, query) => new ExampleComponent(params, query));
 

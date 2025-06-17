@@ -1,5 +1,6 @@
 import { Component } from "../component.js";
 import html from "./component.html";
+import MenuComponent from "./menu/menu.js";
 
 export default class ExampleComponent extends Component {
   target = "app";
@@ -29,6 +30,7 @@ export default class ExampleComponent extends Component {
       updateTitle: (e) => this.updateTitle(e),
       toggle: () => this.toggle(),
     });
+    this.addComponent(MenuComponent);
   }
 
   testIf() {
