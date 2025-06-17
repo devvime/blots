@@ -1,7 +1,7 @@
 import blots from "./blots.js";
 import { state } from "./state.js";
 
-export default class Component {
+export class Component {
   component = {};
   target = "app";
   template = "";

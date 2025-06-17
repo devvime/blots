@@ -1,4 +1,4 @@
-import Component from "../component.js";
+import { Component } from "../component.js";
 import html from "./component.html";
 
 export default class ExampleComponent extends Component {
