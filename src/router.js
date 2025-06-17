@@ -17,11 +17,13 @@ export class Router {
   }
 
   setDataLink() {
-    document.querySelectorAll("a[data-link]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        const target = e.currentTarget.getAttribute("href");
-        if (target) this.navigate(target);
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a[data-link]").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = e.currentTarget.getAttribute("href");
+          if (target) this.navigate(target);
+        });
       });
     });
   }
@@ -41,7 +43,6 @@ export class Router {
     }
     history.pushState({}, "", "/404");
     document.querySelector("app").innerHTML = "";
-    console.warn("No route matched:", currentPath);
   }
 
   matchPath(routePath, currentPath) {
