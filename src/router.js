@@ -39,6 +39,8 @@ export class Router {
         return;
       }
     }
+    history.pushState({}, "", "/404");
+    document.querySelector("app").innerHTML = "";
     console.warn("No route matched:", currentPath);
   }
 
