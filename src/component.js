@@ -1,4 +1,4 @@
-import blots from "./blots.js";
+import { blots } from "./blots.js";
 import { state } from "./state.js";
 
 export class Component {
