@@ -42,11 +42,11 @@ export function model(element, data) {
         console.warn(`Property: ${attr[0]} is not implemented.`);
       } else {
         data[attr] = e.target.value;
-        emit("modelChange", { attr: `data-m-${attr}` });
+        emit("modelChange", e);
       }
     });
     output("modelChange", (e) => {
-      const target = document.querySelector(`[${e.attr}]`);
+      const target = document.querySelector(`[data-m-${attr}]`);
       if (target) {
         target.focus();
       }
