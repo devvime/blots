@@ -36,24 +36,23 @@ export function model(element, data) {
   const elements = element.querySelectorAll("[\\@model]");
   for (let element of elements) {
     const attr = element.attributes["@model"].value;
+    element.setAttribute(`data-m-${attr}`, "");
     element.value = data[attr];
     element.addEventListener("input", (e) => {
       if (data[attr] === undefined) {
         console.warn(`Property: ${attr[0]} is not implemented.`);
       } else {
         data[attr] = e.target.value;
-        emit("modelChange", e);
+        emit("modelChange", { attr: `data-m-${attr}` });
       }
     });
     output("modelChange", (e) => {
-      // const target = document.querySelector(`[data-m-${attr}]`);
-      const target = document.querySelector(e.target);
+      const target = document.querySelector(`[${e.attr}]`);
       if (target) {
         target.focus();
       }
     });
     element.removeAttribute("@model");
-    element.setAttribute(`data-m-${attr}`, "");
   }
 }
 
