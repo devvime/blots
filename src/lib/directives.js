@@ -32,27 +32,57 @@ export function change(element, data) {
   }
 }
 
+// export function model(element, data) {
+//   const elements = element.querySelectorAll("[\\@model]");
+//   for (let element of elements) {
+//     const attr = element.attributes["@model"].value;
+//     element.value = data[attr];
+//     element.addEventListener("input", (e) => {
+//       if (data[attr] === undefined) {
+//         console.warn(`Property: ${attr[0]} is not implemented.`);
+//       } else {
+//         data[attr] = e.target.value;
+//         emit("modelChange", e);
+//       }
+//     });
+//     output("modelChange", (e) => {
+//       const target = document.querySelector(`[data-m-${attr}]`);
+//       if (target) {
+//         target.focus();
+//       }
+//     });
+//     element.removeAttribute("@model");
+//     element.setAttribute(`data-m-${attr}`, "");
+//   }
+// }
+
 export function model(element, data) {
   const elements = element.querySelectorAll("[\\@model]");
-  for (let element of elements) {
-    const attr = element.attributes["@model"].value;
-    element.value = data[attr];
-    element.addEventListener("input", (e) => {
+
+  for (let el of elements) {
+    const attr = el.getAttribute("@model");
+    el.value = data[attr];
+
+    el.addEventListener("input", (e) => {
       if (data[attr] === undefined) {
-        console.warn(`Property: ${attr[0]} is not implemented.`);
+        console.warn(`Property: ${attr} is not implemented.`);
       } else {
         data[attr] = e.target.value;
-        emit("modelChange", e);
+        emit("modelChange", { attr, value: e.target.value });
       }
     });
+
     output("modelChange", (e) => {
-      const target = document.querySelector(`[data-m-${attr}]`);
-      if (target) {
-        target.focus();
+      if (e.attr === attr) {
+        const target = document.querySelector(`[data-m-${attr}]`);
+        if (target) {
+          target.focus();
+        }
       }
     });
-    element.removeAttribute("@model");
-    element.setAttribute(`data-m-${attr}`, "");
+
+    el.removeAttribute("@model");
+    el.setAttribute(`data-m-${attr}`, "");
   }
 }
 
