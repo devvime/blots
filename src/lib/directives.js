@@ -36,7 +36,6 @@ export function model(element, data) {
   const elements = element.querySelectorAll("[\\@model]");
   for (let element of elements) {
     const attr = element.attributes["@model"].value;
-    element.setAttribute(`data-m-${attr}`, "");
     element.value = data[attr];
     element.addEventListener("input", (e) => {
       if (data[attr] === undefined) {
@@ -53,6 +52,7 @@ export function model(element, data) {
       }
     });
     element.removeAttribute("@model");
+    element.setAttribute(`data-m-${attr}`, "");
   }
 }
 
