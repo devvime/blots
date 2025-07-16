@@ -1,13 +1,11 @@
 {
   "name": "blots",
   "version": "2.0.6",
-  "description": "Simple SPA.",
+  "description": "A Minimal and Expressive JS SPA Micro Framework",
   "main": "src/index.js",
   "scripts": {
-    "start": "concurrently \"npm run dev\" \"npm run server\"",
-    "server": "npx http-server . -P http://localhost:8080? -c-1",
-    "dev": "esbuild src/main.js --bundle --minify --target=es2015 --outfile=dist/js/main.min.js --sourcemap --loader:.html=text --watch",
-    "build": "esbuild src/index.js --bundle --minify --target=es2015 --outfile=dist/js/blots.min.js --sourcemap --loader:.html=text"
+    "dev": "vite",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -28,9 +26,10 @@
     "url": "https://github.com/devvime/blots/issues"
   },
   "homepage": "https://github.com/devvime/blots#readme",
-  "dependencies": {},
+  "dependencies": {
+    "mustache": "^4.2.0"
+  },
   "devDependencies": {
-    "concurrently": "^9.1.2",
-    "esbuild": "^0.25.5"
+    "vite": "^7.0.4"
   }
 }

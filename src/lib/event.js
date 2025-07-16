@@ -4,5 +4,5 @@ export function emit(name, data) {
 }
 
 export function output(name, callback) {
-  document.addEventListener(name, callback)
+  document.addEventListener(name, callback);
 }
