@@ -1,5 +1,3 @@
-import { emit, output } from "./event.js";
-
 export function click(element, data) {
   const elements = element.querySelectorAll("[\\@click]");
   for (let element of elements) {
@@ -36,23 +34,17 @@ export function model(element, data) {
   const elements = element.querySelectorAll("[\\@model]");
   for (let element of elements) {
     const attr = element.attributes["@model"].value;
+    data.refs[attr] = element;
     element.value = data[attr];
     element.addEventListener("input", (e) => {
       if (data[attr] === undefined) {
         console.warn(`Property: ${attr[0]} is not implemented.`);
       } else {
         data[attr] = e.target.value;
-        emit("modelChange", e);
-      }
-    });
-    output("modelChange", (e) => {
-      const target = document.querySelector(`[data-m-${attr}]`);
-      if (target) {
-        target.focus();
+        data.refs[attr].focus();
       }
     });
     element.removeAttribute("@model");
-    element.setAttribute(`data-m-${attr}`, "");
   }
 }
 
