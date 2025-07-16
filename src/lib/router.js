@@ -1,9 +1,13 @@
+import { RouterInstance } from "./helper.js";
+
 export class Router {
   constructor() {
     this.routes = [];
 
     window.addEventListener("popstate", () => this.resolve());
-    this.setDataLink();
+    document.addEventListener("DOMContentLoaded", () => this.setDataLink());
+
+    RouterInstance.set(this);
   }
 
   add(path, callback) {
@@ -14,15 +18,18 @@ export class Router {
     history.pushState({}, "", path);
     document.querySelector("app").innerHTML = "";
     this.resolve();
+    this.setDataLink();
   }
 
   setDataLink() {
-    document.querySelectorAll("[data-link]").forEach((el) => {
+    document.querySelectorAll("a").forEach((el) => {
+      const target = el.getAttribute("target");
+      if (target !== null) return;
       el.addEventListener("click", (e) => {
         e.preventDefault();
         e.target.style.cursor = "pointer";
-        const target = e.currentTarget.getAttribute("data-link");
-        if (target) this.navigate(target);
+        const link = e.currentTarget.getAttribute("href");
+        if (link) this.navigate(link);
       });
     });
   }

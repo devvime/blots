@@ -1,10 +1,10 @@
 # **Blots.js**
 
-**Blots.js** is a lightweight JavaScript SPA micro-framework that provides:
+**Blots.js** is a lightweight JavaScript micro-framework for SPAs, offering:
 
-- **Routing system** with path and query parameters
-- **Template engine** using custom HTML attributes
-- **Reactivity** powered by native `Proxy` objects
+- 📍 **Routing system** with support for path and query parameters
+- 🧠 **Template engine** using custom HTML attributes
+- ⚡ **Reactivity** powered by native JavaScript `Proxy` objects
 
 ---
 
@@ -25,11 +25,11 @@ const router = new Router();
 
 // Define routes
 router.add("/user/:id/:name", (params, query) => {
-  console.log("URL Params:", params);
+  console.log("Route Params:", params);
   console.log("Query String Params:", query);
 });
 
-// Initialize routing
+// Start routing
 router.resolve();
 ```
 
@@ -38,102 +38,87 @@ router.resolve();
 ## 🧩 Creating a Component
 
 ```js
-import Component from "blots";
-import html from "./my-component.html"; // Import the HTML file
+import { render, include, state } from "blots";
+import htmlElement from "./my-component.html?raw";
+import headerElement from "@components/header/header.html?raw";
+import footerElement from "@components/footer/footer.html?raw";
 
-export default class MyComponent extends Component {
-  target = "app"; // Target element for rendering
-  template = html; // Template HTML
+const data = state(
+  {
+    refs: {},
+    title: "Hello from my component",
+    displayCondition: false,
+    activeClass: true,
+    testClick(e) {
+      console.log(e);
+      data.displayCondition = !data.displayCondition;
+      data.activeClass = !data.activeClass;
+      console.log(data.refs.btnAddLesson);
+    },
+    inputChange(e) {
+      data.title = e.target.value;
+    },
+  },
+  intro
+);
 
-  constructor(params, query) {
-    super(params, query);
-  }
-
-  init() {
-    // Set reactive data
-    this.setData({
-      name: "Steve",
-      title: "Hello World!",
-      showMessage: true,
-      items: ["Cup", "Book", "Game"],
-      isActive: false,
-      user: {
-        name: "Steve",
-        address: {
-          street: "Street name",
-        },
-      },
-    });
-
-    // Set reactive methods
-    this.setMethods({
-      sayHello: () => alert("Hello!"),
-      updateShowMessage: () => this.updateShowMessage(),
-      addItem: (e) => this.addItem(e),
-      toggleIsActive: () => this.toggleIsActive(),
-    });
-  }
-
-  updateShowMessage() {
-    this.setData({
-      showMessage: !this.getData("showMessage"),
-    });
-  }
-
-  addItem(e) {
-    this.setData({
-      items: [...this.getData("items"), e.target.value],
-    });
-  }
-
-  toggleIsActive() {
-    this.setData({
-      isActive: !this.getData("isActive"),
-    });
-  }
+export function myComponent(params, query) {
+  render("app", htmlElement, data);
+  include("header-element", headerElement);
+  include("footer-element", footerElement);
 }
 ```
-
-> Use `this.setData({})` to define reactive properties, and `this.getData('propName')` to access them.
 
 ---
 
 ## 🧬 HTML Bindings
 
 ```html
-<!-- {{ prop }}: Displays a reactive property -->
-<h1>{{ title }}</h1>
+<section>
+  <style>
+    .my-class {
+      background-color: yellow;
+    }
+  </style>
 
-<!-- @change: Triggers a method defined via setMethods -->
-<input type="text" @change="addItem" />
+  <!-- Menu component mount point -->
+  <menu-element></menu-element>
 
-<!-- @click: Executes defined methods -->
-<button @click="sayHello">Click me</button>
-<button @click="updateShowMessage">Toggle Message</button>
+  <!-- {{ prop }}: displays a reactive property -->
+  <h1>{{ title }}</h1>
+  <p>{{ name }}</p>
 
-<!-- @for: Loops through a reactive array -->
-<ul>
-  <li @for="item in items">{{ item }}</li>
-</ul>
+  <!-- Conditional rendering with @if -->
+  <p @if="displayText">Conditional text</p>
+  <button @click="setDisplayText">Toggle Text</button>
 
-<!-- @if: Conditional rendering -->
-<p @if="showMessage">Message is visible</p>
+  <hr />
 
-<!-- @class: Toggles CSS classes based on reactive data -->
-<button @click="toggleIsActive" @class="{ active: isActive }">
-  <span @if="isActive">Deactivate</span>
-  <span @else="isActive">Activate</span>
-</button>
+  <!-- Inputs with events and data binding -->
+  <div>
+    <input type="text" placeholder="Search..." @change="search" @ref="search" />
+    <input type="text" placeholder="Bound to title" @model="title" />
+    <input type="text" placeholder="Bound to name" @model="name" />
+  </div>
 
-<!-- @model: Two-way binding with input fields (requires unique @name) -->
-<input type="text" @model="name" @name="inputName" />
-<input type="text" @model="title" @name="inputTitle" />
-<input type="text" @model="user.name" @name="inputUserName" />
+  <hr />
 
-<!-- Nested reactive properties -->
-<p>Hello, {{ name }}!</p>
-<p>User name: {{ user.name }}</p>
-<p>Address: Street {{ user.address.street }}</p>
+  <!-- Actions -->
+  <button @click="increment">Add</button>
+  <button @click="reset">Reset</button>
+
+  <p>Users: {{ count }}</p>
+
+  <hr />
+
+  <!-- Conditional class -->
+  <div @class="{ 'my-class': !displayText }">
+    <!-- Iteration with loop -->
+    {{# users }}
+    <p>Name: {{ name }} - Email: {{ email }}</p>
+    {{/ users }}
+  </div>
+</section>
 ```
 
 ---
@@ -142,15 +127,12 @@ export default class MyComponent extends Component {
 
 ```js
 import { Router } from "blots";
-import MyComponent from "./components/my-component.js";
+import myComponent from "./components/my-component.js";
 
 const router = new Router();
 
-// Each route can return a new component instance
-router.add(
-  "/user/:id/:name",
-  (params, query) => new MyComponent(params, query)
-);
+// Each route can instantiate a different component
+router.add("/user/:id/:name", myComponent);
 
 // Start the router
 router.resolve();
@@ -158,7 +140,7 @@ router.resolve();
 
 ---
 
-## 🗂 index.html
+## 🗂 index.html Structure
 
 ```html
 <!DOCTYPE html>
@@ -169,10 +151,10 @@ router.resolve();
     <title>Blots App</title>
   </head>
   <body>
-    <a href="/" data-link>Home</a>
-    <a href="/user/10/steve?test=true" data-link>User</a>
+    <a href="/">Home</a>
+    <a href="/user/10/steve?test=true">User</a>
 
-    <!-- Root -->
+    <!-- App root -->
     <app></app>
 
     <script type="module" src="./main.js"></script>
@@ -184,6 +166,7 @@ router.resolve();
 
 ## 📝 Final Notes
 
-- HTML templates are automatically processed when importing `.html` files.
-- Reactive properties automatically update the DOM when modified.
-- Deeply nested reactivity and two-way data binding are fully supported.
+- Imported `.html` files are automatically processed as templates.
+- Reactive properties automatically update the DOM when changed.
+- Full support for **deep reactivity** and **two-way data binding**.
+- Core integration with the DOM is done using custom attributes like `@click`, `@model`, `@if`, `@ref`, and `@class`.
