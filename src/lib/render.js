@@ -1,6 +1,13 @@
 import mustache from "mustache";
 import { createElement } from "./template.js";
-import { click, change, model, handleClass, refs } from "./directives.js";
+import {
+  click,
+  change,
+  model,
+  condition,
+  handleClass,
+  refs,
+} from "./directives.js";
 import { RouterInstance } from "./helper";
 
 export function render(target, file, data = {}, DOMRefresh = true) {
@@ -14,6 +21,7 @@ export function render(target, file, data = {}, DOMRefresh = true) {
   click(element, data);
   change(element, data);
   model(element, data);
+  condition(element, data);
   handleClass(element, data);
   refs(element, data);
 

@@ -48,6 +48,21 @@ export function model(element, data) {
   }
 }
 
+export function condition(element, data) {
+  const elements = element.querySelectorAll("[\\@if]");
+  for (let element of elements) {
+    const attr = element.attributes["@if"].value;
+    try {
+      if (!eval(`data?.${attr}`)) {
+        element.remove();
+      }
+    } catch (err) {
+      console.warn(`@if error: ${err}`);
+    }
+    element.removeAttribute("@if");
+  }
+}
+
 export function handleClass(element, data) {
   const elements = element.querySelectorAll("[\\@class]");
   for (let element of elements) {
