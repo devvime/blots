@@ -1,11 +1,20 @@
 {
   "name": "blots",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "A Minimal and Expressive JS SPA Micro Framework",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "type": "module",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "esbuild src/index.js --bundle --minify --target=es2015 --outfile=dist/index.js --watch",
+    "build": "esbuild src/index.js --bundle --minify --target=es2015 --outfile=dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +39,6 @@
     "mustache": "^4.2.0"
   },
   "devDependencies": {
-    "vite": "^7.0.4"
+    "esbuild": "^0.25.6"
   }
 }
