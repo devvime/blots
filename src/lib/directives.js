@@ -53,7 +53,7 @@ export function condition(element, data) {
   for (let element of elements) {
     const attr = element.attributes["@if"].value;
     try {
-      if (!eval(`data.${attr}`)) {
+      if (!eval(`data?.${attr}`)) {
         element.remove();
       }
     } catch (err) {
