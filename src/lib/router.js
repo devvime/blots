@@ -51,8 +51,10 @@ export class Router {
         return;
       }
     }
-    history.pushState({}, "", "/404");
-    document.querySelector("app").innerHTML = "";
+    if (isSPA) {
+      history.pushState({}, "", "/404");
+      document.querySelector("app").innerHTML = "";
+    }
   }
 
   matchPath(routePath, currentPath) {
