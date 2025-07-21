@@ -1,6 +1,8 @@
 import { RouterInstance } from "./helper.js";
 
 export class Router {
+  spa = true;
+
   constructor() {
     this.routes = [];
 
@@ -22,6 +24,7 @@ export class Router {
   }
 
   setDataLink() {
+    if (!this.spa) return;
     document.querySelectorAll("a").forEach((el) => {
       const target = el.getAttribute("target");
       if (target !== null) return;
@@ -34,7 +37,8 @@ export class Router {
     });
   }
 
-  resolve() {
+  resolve(isSPA = true) {
+    this.spa = isSPA;
     const currentPath = window.location.pathname;
     const query = this.parseQueryParams(window.location.search);
     for (const route of this.routes) {
